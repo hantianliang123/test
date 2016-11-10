@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="citylist.js"></script>
+</head>
+<body>
+    <select name="" id="province">
+        <option value="-1">---请选择---</option>
+    </select>
+    <select name="" id="city">
+        <option value="-1">---请选择---</option>
+    </select>
+    <select name="" id="county">
+        <option value="-1">---请选择---</option>
+    </select>
+
+
+    <script>
+        var pro = document.getElementById('province');
+        var cty = document.getElementById('city');
+        var coun = document.getElementById('county');
+        for(var i = 0; i < json.citylist.length; i++){//遍历添加省份
+            pro.innerHTML += '<option value="' + i + '">' + json.citylist[i].p +'</option>';
+        };
+        pro.onchange = function(){//给省份添加变更事件
+            var optVal = '<option value="-1">---请选择---</option>';
+            if(json.citylist.value == '-1'){//不显示省份时，清空城市列表
+                cty.innerHTML = optVal;
+                return false;
+            };
+            cty.innerHTML = '<option value="-1">---请选择---</option>';
+            for(var i = 0; i < json.citylist[pro.value].c.length; i++){//遍历添加城市
+//                alert(json.citylist[pro.value].c.length)
+                optVal += '<option value="' + i + '">' + json.citylist[pro.value].c[i].n +'</option>';
+                cty.innerHTML = optVal;
+            };
+        };
+    </script>
+</body>
+</html>
